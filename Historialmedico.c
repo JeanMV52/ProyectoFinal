@@ -17,6 +17,14 @@ struct Paciente{ //Estructura donde se guardan todos los datos que se registrar�
 void guardarDatos(struct Paciente paciente){ //Se hace uso de la función void para que no se devuelva ningún valor, y toma el parámetro del struct que contiene los datos de los pacientes.
     FILE *archivo; //Usamos el archivo FILE para poder mover los datos a un archivo plano.
     archivo = fopen("datosPacientes.csv", "a");
+    time_t tiempoActual;
+    time(&tiempoActual);
+    struct tm *miTiempo = localtime(&tiempoActual); //Funcion para que muestre el tiempo actual que queramos
+
+    fprintf(archivo, "%d/%d/%d\n", miTiempo->tm_mday, miTiempo->tm_mon+1, miTiempo->tm_year+1900); //Este apartado muestra el anio
+
+    fprintf(archivo, "%d:%d:%d\t", miTiempo->tm_hour, miTiempo->tm_min, miTiempo->tm_sec); //Este apartado muestra la hora, minutos y segundos en el que se ingresaron los datos
+
     fprintf(archivo, "%s; %d; %.2f; %.2f; %.2f; %d; %.2f; %d; %.2f\n", paciente.nombre, paciente.edad, paciente.altura, paciente.peso, paciente.presionArterial,
     paciente.pulso, paciente.temperatura, paciente.frecuenciaRespiratoria, paciente.imc); //fprintf para imprimir los datos en el archivo plano.
     fclose(archivo); //fclose para cerrar el archivo.
@@ -111,6 +119,7 @@ float calcularMC(float peso, float altura){
 int main(){
     int opcion;
     struct Paciente paciente;
+    time_t tiempoActual;
 
     do{//uso de ciclo do while para realizar el menu 
         printf("\n---- Menu ----\n");

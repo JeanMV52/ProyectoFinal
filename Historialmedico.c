@@ -69,7 +69,7 @@ void buscarDatos(char nombreBuscado[]){
 
 void borrarDatos(char nombreBorrar[]){ //Esta funcion es para borrar los datos de un paciente en especifico
     FILE *archivoEntrada;
-    archivoEntrada = fopen("datos_pacientes.csv", "r");
+    archivoEntrada = fopen("datosPacientes.csv", "r");
 
     if (archivoEntrada == NULL) {
         printf("El archivo no existe o no se puede abrir.\n");
@@ -107,7 +107,7 @@ void borrarDatos(char nombreBorrar[]){ //Esta funcion es para borrar los datos d
         return;
     }
 
-    remove("datos_pacientes.csv");
+    remove("datosPacientes.csv");
     rename("temp.csv","datos_pacientes.csv");
     printf("Paciente borrado exitosamente.\n");
 }
@@ -154,6 +154,7 @@ int main(){
                 scanf("%d", &paciente.frecuenciaRespiratoria);
                 guardarDatos(paciente);
                 printf("Datos guardados exitosamente.\n");
+                paciente.imc = calcularMC(paciente.peso,paciente.altura);
                 break;
             case 2:
                 leerDatos();

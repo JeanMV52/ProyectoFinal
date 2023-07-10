@@ -36,3 +36,25 @@ void leerDatos(){ //Uso de función void para leer los datoa ingresados
 }
 fclose(archivo);
 }
+
+void buscarDatos(char nombreBuscado[]){
+    FILE *archivo;
+    archivo = fopen("datosPacientes.csv", "r");
+    struct Paciente paciente;
+    int encontrado = 0;
+    while(fscanf(archivo, "%s %d %f %f %f %d %f %d %f\n", paciente.nombre, &paciente.edad, &paciente.altura, &paciente.peso, &paciente.presionArterial,
+    &paciente.pulso, &paciente.temperatura, &paciente.frecuenciaRespiratoria, &paciente.imc) != EOF){
+        if(strcmp(paciente.nombre, nombreBuscado) == 0){
+           printf("Nombre ; Edad ; Altura ; Peso ; PresionArterial ; Pulso ; Temperatura ; FrecuenciaRespiratoria ; IMC ;\n");
+           printf("%s     ; %d   ; %f     ; %f   ; %f              ; %d    ; %f          ; %d                     ; %f  ;\n", paciente.nombre, paciente.edad, paciente.altura, paciente.peso, paciente.presionArterial,
+           paciente.pulso, paciente.temperatura, paciente.frecuenciaRespiratoria, paciente.imc);
+           encontrado = 1;
+           break;
+
+        }
+    }
+    if (!encontrado) {
+        printf("Paciente no encontrado.\n");
+    }
+    fclose(archivo);
+}

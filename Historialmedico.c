@@ -103,3 +103,8 @@ void borrarDatos(char nombreBorrar[]){ //Esta funcion es para borrar los datos d
     rename("temp.txt","datos_pacientes.txt");
     printf("Paciente borrado exitosamente.\n");
 }
+
+float calcularMC(float peso, float altura){
+    return peso/(altura*altura);
+}
+
